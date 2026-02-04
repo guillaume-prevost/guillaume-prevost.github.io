@@ -1,0 +1,25 @@
+theme: jekyll-theme-cayman
+title: Guillaume Prévost
+description: ML portfolio
+
+
+# Your name to show in the footer
+author: Guillaume Prévost
+
+
+avatar: "images/profile.jpg"
+round-avatar: true
+title-img: "images/profile.jpg"
+
+
+navbar-links:
+  About Me: "aboutme"
+  Resources:
+    - Beautiful Jekyll: "https://beautifuljekyll.com"
+    - Learn markdown: "https://www.markdowntutorial.com/"
+  Author's home: "https://deanattali.com"
+  
+social-network-links:
+  email: "someone@example.com"
+  github: Guillaume Prevost
+  linkedin: Guillaume Prevost
