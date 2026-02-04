@@ -1,831 +1,1089 @@
 <!DOCTYPE html>
-<!--[if IE 8 ]><html class="no-js oldie ie8" lang="en"> <![endif]-->
-<!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<html class="no-js" lang="en">
 <head>
-
-   <!--- basic page needs
-   ================================================== -->
    <meta charset="utf-8">
-	<title>Guillaume Prevost</title>
-	<meta name="description" content="">  
-	<meta name="author" content="">
+   <title>Guillaume Prévost - PhD Researcher in AI & Signal Processing</title>
+   <meta name="description" content="PhD researcher specializing in embedded AI, signal processing, and predictive maintenance at CEA Leti">  
+   <meta name="author" content="Guillaume Prévost">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-   <!-- mobile specific metas
-   ================================================== -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
- 	<!-- CSS
-   ================================================== -->
+   <!-- Fonts -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+   
    <link rel="stylesheet" href="css/base.css">  
    <link rel="stylesheet" href="css/main.css">
    <link rel="stylesheet" href="css/vendor.css">     
 
-   <!-- script
-   ================================================== -->   
-	<script src="js/modernizr.js"></script>
-	<script src="js/pace.min.js"></script>
+   <script src="js/modernizr.js"></script>
+   <script src="js/pace.min.js"></script>
 
-   <!-- favicons
-	================================================== -->
-	<link rel="icon" type="image/png" href="images/icon2.png">
+   <link rel="icon" type="image/png" href="images/icon2.png">
 
+   <style>
+      :root {
+         --primary: #0066ff;
+         --primary-dark: #0052cc;
+         --accent: #00d4ff;
+         --text-primary: #1a1a1a;
+         --text-secondary: #666;
+         --bg-light: #f8f9fa;
+         --bg-white: #ffffff;
+         --border: #e0e0e0;
+         --shadow: rgba(0, 0, 0, 0.1);
+      }
+
+      * {
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+      }
+
+      body {
+         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+         line-height: 1.6;
+         color: var(--text-primary);
+         background: var(--bg-white);
+      }
+
+      /* Typography */
+      h1, h2, h3, h4, h5, h6 {
+         font-family: 'Syne', sans-serif;
+         font-weight: 700;
+         line-height: 1.2;
+         margin-bottom: 1rem;
+      }
+
+      h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+      h2 { font-size: clamp(2rem, 4vw, 3rem); }
+      h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+
+      code, .code {
+         font-family: 'JetBrains Mono', monospace;
+         background: var(--bg-light);
+         padding: 0.2rem 0.5rem;
+         border-radius: 4px;
+         font-size: 0.9em;
+      }
+
+      /* Container */
+      .container {
+         max-width: 1200px;
+         margin: 0 auto;
+         padding: 0 2rem;
+      }
+
+      /* Hero Section */
+      #intro {
+         min-height: 100vh;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+         position: relative;
+         overflow: hidden;
+      }
+
+      #intro::before {
+         content: '';
+         position: absolute;
+         top: 0;
+         left: 0;
+         right: 0;
+         bottom: 0;
+         background: 
+            radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+         animation: pulse 15s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+         0%, 100% { opacity: 1; }
+         50% { opacity: 0.5; }
+      }
+
+      .intro-content {
+         position: relative;
+         z-index: 1;
+         text-align: center;
+         color: white;
+         padding: 2rem;
+      }
+
+      .intro-content h5 {
+         font-size: 1rem;
+         font-weight: 400;
+         letter-spacing: 0.2em;
+         text-transform: uppercase;
+         margin-bottom: 1rem;
+         opacity: 0.9;
+         animation: fadeInUp 0.8s ease-out;
+      }
+
+      .intro-content h1 {
+         margin-bottom: 1.5rem;
+         animation: fadeInUp 0.8s ease-out 0.2s backwards;
+      }
+
+      .intro-position {
+         font-size: 1.25rem;
+         margin-bottom: 2rem;
+         opacity: 0.95;
+         animation: fadeInUp 0.8s ease-out 0.4s backwards;
+      }
+
+      .intro-position span {
+         display: inline-block;
+         margin: 0 1rem;
+      }
+
+      .intro-position span::after {
+         content: '•';
+         margin-left: 2rem;
+         opacity: 0.5;
+      }
+
+      .intro-position span:last-child::after {
+         content: '';
+      }
+
+      @keyframes fadeInUp {
+         from {
+            opacity: 0;
+            transform: translateY(30px);
+         }
+         to {
+            opacity: 1;
+            transform: translateY(0);
+         }
+      }
+
+      .button {
+         display: inline-block;
+         padding: 1rem 2.5rem;
+         background: white;
+         color: var(--primary);
+         text-decoration: none;
+         border-radius: 50px;
+         font-weight: 600;
+         transition: all 0.3s ease;
+         animation: fadeInUp 0.8s ease-out 0.6s backwards;
+      }
+
+      .button:hover {
+         transform: translateY(-2px);
+         box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      }
+
+      .intro-social {
+         position: absolute;
+         bottom: 3rem;
+         left: 50%;
+         transform: translateX(-50%);
+         display: flex;
+         gap: 1.5rem;
+         list-style: none;
+      }
+
+      .intro-social a {
+         color: white;
+         font-size: 1.5rem;
+         transition: transform 0.3s ease;
+         display: block;
+      }
+
+      .intro-social a:hover {
+         transform: scale(1.2);
+      }
+
+      /* Section Styling */
+      section {
+         padding: 6rem 0;
+      }
+
+      .section-intro {
+         text-align: center;
+         margin-bottom: 4rem;
+      }
+
+      .section-intro h5 {
+         color: var(--primary);
+         font-size: 0.9rem;
+         letter-spacing: 0.2em;
+         text-transform: uppercase;
+         margin-bottom: 0.5rem;
+         font-weight: 600;
+      }
+
+      .section-intro h2 {
+         margin-bottom: 1rem;
+      }
+
+      .lead {
+         font-size: 1.2rem;
+         color: var(--text-secondary);
+         max-width: 700px;
+         margin: 0 auto;
+      }
+
+      /* About Section */
+      #about {
+         background: var(--bg-light);
+      }
+
+      .about-grid {
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         gap: 4rem;
+         align-items: start;
+      }
+
+      .profile-card {
+         background: white;
+         padding: 2.5rem;
+         border-radius: 20px;
+         box-shadow: 0 10px 40px var(--shadow);
+      }
+
+      .profile-card img {
+         width: 150px;
+         height: 150px;
+         border-radius: 50%;
+         object-fit: cover;
+         margin-bottom: 1.5rem;
+         border: 4px solid var(--primary);
+      }
+
+      .profile-card h3 {
+         margin-top: 1.5rem;
+         margin-bottom: 1rem;
+      }
+
+      .info-list {
+         list-style: none;
+         margin-top: 1.5rem;
+      }
+
+      .info-list li {
+         padding: 0.75rem 0;
+         border-bottom: 1px solid var(--border);
+         display: flex;
+         justify-content: space-between;
+      }
+
+      .info-list strong {
+         color: var(--text-secondary);
+         font-weight: 600;
+      }
+
+      /* Skills Section */
+      .skills-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+         gap: 2rem;
+         margin-top: 3rem;
+      }
+
+      .skill-category {
+         background: white;
+         padding: 2rem;
+         border-radius: 15px;
+         border: 2px solid var(--border);
+         transition: all 0.3s ease;
+      }
+
+      .skill-category:hover {
+         border-color: var(--primary);
+         transform: translateY(-5px);
+         box-shadow: 0 10px 30px var(--shadow);
+      }
+
+      .skill-category h4 {
+         color: var(--primary);
+         margin-bottom: 1rem;
+         display: flex;
+         align-items: center;
+         gap: 0.5rem;
+      }
+
+      .skill-category h4::before {
+         content: '▹';
+         font-size: 1.5rem;
+      }
+
+      .skill-tags {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 0.5rem;
+         margin-top: 1rem;
+      }
+
+      .skill-tag {
+         background: var(--bg-light);
+         padding: 0.5rem 1rem;
+         border-radius: 20px;
+         font-size: 0.9rem;
+         font-weight: 500;
+         transition: all 0.3s ease;
+      }
+
+      .skill-tag:hover {
+         background: var(--primary);
+         color: white;
+      }
+
+      /* Timeline */
+      .timeline {
+         position: relative;
+         max-width: 900px;
+         margin: 0 auto;
+         padding-left: 3rem;
+      }
+
+      .timeline::before {
+         content: '';
+         position: absolute;
+         left: 0;
+         top: 0;
+         bottom: 0;
+         width: 3px;
+         background: linear-gradient(to bottom, var(--primary), var(--accent));
+      }
+
+      .timeline-item {
+         position: relative;
+         margin-bottom: 3rem;
+         padding: 2rem;
+         background: white;
+         border-radius: 15px;
+         box-shadow: 0 5px 20px var(--shadow);
+         transition: transform 0.3s ease;
+      }
+
+      .timeline-item:hover {
+         transform: translateX(10px);
+      }
+
+      .timeline-item::before {
+         content: '';
+         position: absolute;
+         left: -3.75rem;
+         top: 2rem;
+         width: 1.5rem;
+         height: 1.5rem;
+         background: var(--primary);
+         border: 4px solid white;
+         border-radius: 50%;
+         box-shadow: 0 0 0 4px var(--bg-light);
+      }
+
+      .timeline-date {
+         color: var(--primary);
+         font-weight: 600;
+         font-size: 0.9rem;
+         margin-bottom: 0.5rem;
+      }
+
+      .timeline-item h4 {
+         margin-bottom: 0.5rem;
+      }
+
+      .timeline-company {
+         color: var(--text-secondary);
+         font-style: italic;
+         margin-bottom: 1rem;
+      }
+
+      /* Projects Grid */
+      .projects-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+         gap: 2rem;
+         margin-top: 3rem;
+      }
+
+      .project-card {
+         background: white;
+         border-radius: 15px;
+         overflow: hidden;
+         box-shadow: 0 5px 20px var(--shadow);
+         transition: all 0.3s ease;
+         display: flex;
+         flex-direction: column;
+      }
+
+      .project-card:hover {
+         transform: translateY(-10px);
+         box-shadow: 0 15px 40px var(--shadow);
+      }
+
+      .project-image {
+         width: 100%;
+         height: 200px;
+         object-fit: cover;
+         background: var(--bg-light);
+      }
+
+      .project-content {
+         padding: 1.5rem;
+         flex: 1;
+         display: flex;
+         flex-direction: column;
+      }
+
+      .project-tag {
+         display: inline-block;
+         background: var(--primary);
+         color: white;
+         padding: 0.25rem 0.75rem;
+         border-radius: 15px;
+         font-size: 0.8rem;
+         font-weight: 600;
+         margin-bottom: 1rem;
+      }
+
+      .project-card h3 {
+         font-size: 1.3rem;
+         margin-bottom: 0.75rem;
+      }
+
+      .project-card p {
+         color: var(--text-secondary);
+         margin-bottom: 1rem;
+         flex: 1;
+      }
+
+      .project-metrics {
+         display: flex;
+         gap: 1rem;
+         margin: 1rem 0;
+         padding: 1rem;
+         background: var(--bg-light);
+         border-radius: 10px;
+      }
+
+      .metric {
+         text-align: center;
+      }
+
+      .metric-value {
+         display: block;
+         font-size: 1.5rem;
+         font-weight: 700;
+         color: var(--primary);
+      }
+
+      .metric-label {
+         font-size: 0.8rem;
+         color: var(--text-secondary);
+      }
+
+      .project-links {
+         display: flex;
+         gap: 1rem;
+         margin-top: auto;
+      }
+
+      .project-link {
+         flex: 1;
+         text-align: center;
+         padding: 0.75rem;
+         background: var(--bg-light);
+         color: var(--text-primary);
+         text-decoration: none;
+         border-radius: 8px;
+         font-weight: 600;
+         transition: all 0.3s ease;
+      }
+
+      .project-link:hover {
+         background: var(--primary);
+         color: white;
+      }
+
+      /* Contact Section */
+      #contact {
+         background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+         color: white;
+      }
+
+      #contact .section-intro h5,
+      #contact .section-intro h2,
+      #contact .lead {
+         color: white;
+      }
+
+      .contact-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+         gap: 2rem;
+         margin-top: 3rem;
+      }
+
+      .contact-item {
+         text-align: center;
+         padding: 2rem;
+         background: rgba(255,255,255,0.1);
+         border-radius: 15px;
+         backdrop-filter: blur(10px);
+         transition: all 0.3s ease;
+      }
+
+      .contact-item:hover {
+         background: rgba(255,255,255,0.2);
+         transform: translateY(-5px);
+      }
+
+      .contact-icon {
+         font-size: 2.5rem;
+         margin-bottom: 1rem;
+      }
+
+      .contact-item h5 {
+         margin-bottom: 0.5rem;
+      }
+
+      .contact-item p {
+         opacity: 0.9;
+      }
+
+      /* Footer */
+      footer {
+         background: var(--text-primary);
+         color: white;
+         padding: 3rem 0;
+         text-align: center;
+      }
+
+      .footer-social {
+         display: flex;
+         justify-content: center;
+         gap: 1.5rem;
+         list-style: none;
+         margin-bottom: 1.5rem;
+      }
+
+      .footer-social a {
+         color: white;
+         font-size: 1.5rem;
+         transition: color 0.3s ease;
+      }
+
+      .footer-social a:hover {
+         color: var(--accent);
+      }
+
+      .copyright {
+         opacity: 0.7;
+         font-size: 0.9rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+         .about-grid {
+            grid-template-columns: 1fr;
+         }
+
+         .timeline {
+            padding-left: 2rem;
+         }
+
+         .timeline-item::before {
+            left: -2.75rem;
+         }
+
+         .intro-position span {
+            display: block;
+            margin: 0.5rem 0;
+         }
+
+         .intro-position span::after {
+            display: none;
+         }
+      }
+
+      /* Scroll animations */
+      .fade-in {
+         opacity: 0;
+         transform: translateY(30px);
+         transition: all 0.6s ease;
+      }
+
+      .fade-in.visible {
+         opacity: 1;
+         transform: translateY(0);
+      }
+   </style>
 </head>
 
 <body id="top">
 
-	<!-- intro section
-   ================================================== -->
-   <section id="intro">   
-
-   	<div class="intro-overlay"></div>	
-
-   	<div class="intro-content">
-   		<div class="row">
-
-   			<div class="col-twelve">
-
-	   			<h5>Portfolio</h5>
-	   			<h1>Guillaume Prévost</h1>
-
-	   			<p class="intro-position">
-	   				<span>Engineering student</span>
-	   				<span>Mountain lover</span> 
-	   			</p>
-
-	   			<a class="button stroke smoothscroll" href="#about" title="">More About Me</a>
-	   		</div>  
-   			
-   		</div>   		 		
-   	</div> <!-- /intro-content --> 
-
-   	<ul class="intro-social">        
-         <li><a href="https://github.com/Prevost-Guillaume"><i class="fa fa-github"></i></a></li>
-         <li><a href="https://www.linkedin.com/in/guillaume-prevost-026a46206/"><i class="fa fa-linkedin"></i></a></li>
-      </ul> <!-- /intro-social -->      	
-
-   </section> <!-- /intro -->
-
-
-   <!-- about section
-   ================================================== -->
-   <section id="about">  
-
-   	<div class="row section-intro">
-   		<div class="col-twelve">
-
-   			<h5>About me</h5>
-   			<h1>Let me introduce myself.</h1>
-
-   			<div class="intro-info">
-
-   				<img src="images/profile.jpg" alt="Profile Picture">
-
-   				<p class="lead">
-					Engineering student passionate about ML,
-					mountain lover,
-					rock drummer,
-					curious and motivated.
-					Soon bearded and muscular.</p>
-   			</div>   			
-   		</div>   		
-   	</div> <!-- /section-intro -->
-
-   	<div class="row about-content">
-
-   		<div class="col-six tab-full">
-
-   			<h3>Profile</h3>
-   			<p>I am Guillaume Prévost, currently studying computer science and electronics at ISEN in lille,
-   			in order to orient myself towards data science. In addition to data science, I would also describe myself as a drummer and mountain man.</p>
-
-   			<ul class="info-list">
-   				<li>
-   					<strong>Fullname:</strong>
-   					<span>Guillaume Prévost</span>
-   				</li>
-   				<li>
-   					<strong>Birth Date:</strong>
-   					<span>October 21, 2000</span>
-   				</li>
-   				<li>
-   					<strong>Email:</strong>
-   					<span>prevost.guillaume38@gmail.com</span>
-   				</li>
-   			</ul> <!-- /info-list -->
-
-   		</div>
-
-   		<div class="col-six tab-full">
-
-   			<h3>Skills</h3>
-   			<p>Beginner on the path of machine learning, I learn eagerly every day.</p>
-
-				<ul class="skill-bars">
-				   <li>
-				   	<div class="progress percent90"><span>90%</span></div>
-				   	<strong>Python</strong>
-				   </li>
-				   <li>
-				   	<div class="progress percent80"><span>80%</span></div>
-				   	<strong>Statistics</strong>
-				   </li>
-				   <li>
-				   	<div class="progress percent75"><span>75%</span></div>
-				   	<strong>Signal processing</strong>
-				   </li>
-				   <li>
-				   	<div class="progress percent65"><span>65%</span></div>
-				   	<strong>Probabilities</strong>
-				   </li>
-				   <li>
-				   	<div class="progress percent60"><span>60%</span></div>
-				   	<strong>Matlab</strong>
-				   </li>
-      
-				</ul> <!-- /skill-bars -->		
-
-   		</div>
-
-   	</div>
-
-   	<div class="row button-section">
-   		<div class="col-twelve">
-   			<a href="images/Resume_Guillaume_Prevost.pdf" title="Download Resume" class="button button-primary">Download Resume</a>
-   		</div>   		
-   	</div>
-
-   </section> <!-- /process-->    
-
-
-   <!-- resume Section
-   ================================================== -->
-	<section id="resume" class="grey-section">
-
-		<div class="row section-intro">
-   		<div class="col-twelve">
-
-   			<h5>Resume</h5>
-   			<h1>More about my background.</h1>
-
-   			<p class="lead">Education, work experience, I tell you everything.</p>
-
-   		</div>   		
-   	</div>
-   	
-   	<div class="row resume-timeline">
-
-   		<div class="col-twelve resume-header">
-
-   			<h2>Education</h2>
-
-   		</div> <!-- /resume-header -->
-
-   		<div class="col-twelve">
-
-   			<div class="timeline-wrap">
-
-	   			<div class="timeline-block">
-
-	   				<div class="timeline-ico">
-	   					<i class="fa fa-briefcase"></i>
-	   				</div>
-
-	   				<div class="timeline-header">
-	   					<h3>professionalization contract</h3>
-	   					<p>September 2022 - Present</p>
-	   				</div>
-
-	   				<div class="timeline-content">
-	   					<h4>Neoledge</h4>
-	   					<p>Member of the research and development team for AI solutions.</p>
-	   				</div>
-
-	   			</div> <!-- /timeline-block -->
-
-	   			<div class="timeline-block">
-
-	   				<div class="timeline-ico">
-	   					<i class="fa fa-briefcase"></i>
-	   				</div>
-
-	   				<div class="timeline-header">
-	   					<h3>Microsoft DP-100 certification</h3>
-	   					<p>December 2022</p>
-	   				</div>
-
-	   				<div class="timeline-content">
-	   					<h4>Microsoft</h4>
-	   					<p>Completion of microsoft certification about Azure Machine-learning.</p>
-	   				</div>
-
-	   			</div> <!-- /timeline-block -->
-
-   				<div class="timeline-block">
-
-	   				<div class="timeline-ico">
-	   					<i class="fa fa-briefcase"></i>
-	   				</div>
-
-	   				<div class="timeline-header">
-	   					<h3>Engineering school</h3>
-	   					<p>September 2018 - Present</p>
-	   				</div>
-
-	   				<div class="timeline-content">
-	   					<h4>ISEN Lille</h4>
-	   					<p>Engineering studies in Lille (France). Learning of computer science, mathematics, physics, electronics and English.</p>
-	   				</div>
-
-	   			</div> <!-- /timeline-block -->
-
-
-	   			<div class="timeline-block">
-
-	   				<div class="timeline-ico">
-	   					<i class="fa fa-briefcase"></i>
-	   				</div>
-
-	   				<div class="timeline-header">
-	   					<h3>ML Certification</h3>
-	   					<p>January 2020</p>
-	   				</div>
-
-	   				<div class="timeline-content">
-	   					<h4>Coursera Plateform</h4>
-	   					<p>Completion of an 11-week online Stanford course on machine learning.</p>
-	   				</div>
-
-	   			</div> <!-- /timeline-block -->
-
-	   			<div class="timeline-block">
-
-	   				<div class="timeline-ico">
-	   					<i class="fa fa-briefcase"></i>
-	   				</div>
-
-	   				<div class="timeline-header">
-	   					<h3>Scientific baccalaureate</h3>
-	   					<p>June 2018</p>
-	   				</div>
-
-	   				<div class="timeline-content">
-	   					<h4>Philippine Duchesne high school</h4>
-	   					<p>Obtained the Scientific Baccalaureate, specialising in Mathematics.</p>
-	   				</div>
-
-	   			</div> <!-- /timeline-block -->
-
-   			</div> <!-- /timeline-wrap -->   			
-
-   		</div> <!-- /col-twelve -->
-   		
-   	</div> <!-- /resume-timeline -->
-		
-	</section> <!-- /features -->
-
-
-	<!-- Portfolio Section
-   ================================================== -->
-	<section id="portfolio">
-
-		<div class="row section-intro">
-   		<div class="col-twelve">
-
-   			<h5>Portfolio</h5>
-   			<h1>Personal projects</h1>
-
-			<aside class="pull-quote">
-				   <blockquote>
-					   <p>Nothing great in the world was accomplished without passion.</p>
-					</blockquote>
-				<cite>- Georg Hegel -</cite>
-			</aside>
-
-
-   		</div>   		
-   	</div> <!-- /section-intro--> 
-
-   	<div class="row portfolio-content">
-
-   		<div class="col-twelve">
-
-   			<!-- portfolio-wrapper -->
-	         <div id="folio-wrapper" class="block-1-2 block-mob-full stack">
-
-	        	<div class="bgrid folio-item">
-	               <div class="item-wrap">
-	               	<img src="images/vélo (5).jpg" alt="Graphic">
-	               	 <a href="#modal-01" class="overlay"> 
-	                     <div class="folio-item-table">
-	                     	<div class="folio-item-cell">
-	                     		<h3 class="folio-title">Cycling analysis</h3>	     					    
-		     					    	<span class="folio-types">
-		     					       	  Deep learning
-		     					      </span>		     		
-		     					   </div> 	                      	
-	                     </div>                    
-	                  </a>
-	               </div>
-	        		</div> <!-- /folio-item --><!-- project 6 -->
-
-	        	<div class="bgrid folio-item">
-	               <div class="item-wrap">
-	               	<img src="images/time2.jpg" alt="Graphic">
-	               	 <a href="#modal-02" class="overlay"> 
-	                     <div class="folio-item-table">
-	                     	<div class="folio-item-cell">
-	                     		<h3 class="folio-title">Time series forecasting</h3>	     					    
-		     					    	<span class="folio-types">
-		     					       	  Time series analysis
-		     					      </span>		     		
-		     					   </div> 	                      	
-	                     </div>                    
-	                  </a>
-	               </div>
-	        		</div> <!-- /folio-item --><!-- project 2 -->
-
-	        	<div class="bgrid folio-item">
-	               <div class="item-wrap">
-	               	<img src="images/dna2.jpg" alt="Graphic">
-	               	 <a href="#modal-03" class="overlay"> 
-	                     <div class="folio-item-table">
-	                     	<div class="folio-item-cell">
-	                     		<h3 class="folio-title">Parameters genetic optimization</h3>	     					    
-		     					    	<span class="folio-types">
-		     					       	  Metaheuristic
-		     					      </span>		     		
-		     					   </div> 	                      	
-	                     </div>                    
-	                  </a>
-	               </div>
-	        		</div> <!-- /folio-item --><!-- project 3 -->
-
-
-	        	<div class="bgrid folio-item">
-	               <div class="item-wrap">
-	               	<img src="images/paint3.jpg" alt="Graphic">
-	               	 <a href="#modal-04" class="overlay"> 
-	                     <div class="folio-item-table">
-	                     	<div class="folio-item-cell">
-	                     		<h3 class="folio-title">Photo colorization</h3>	     					    
-		     					    	<span class="folio-types">
-		     					       	  Deep learning
-		     					      </span>		     		
-		     					   </div> 	                      	
-	                     </div>                    
-	                  </a>
-	               </div>
-	        		</div> <!-- /folio-item --><!-- project 4 -->
-
-
-
-	        	<div class="bgrid folio-item">
-	               <div class="item-wrap">
-	               	<img src="images/genetic_func_1.jpg" alt="Graphic">
-	               	 <a href="#modal-05" class="overlay"> 
-	                     <div class="folio-item-table">
-	                     	<div class="folio-item-cell">
-	                     		<h3 class="folio-title">Function approximation</h3>	     					    
-		     					    	<span class="folio-types">
-		     					       	  Metaheuristic
-		     					      </span>		     		
-		     					   </div> 	                      	
-	                     </div>                    
-	                  </a>
-	               </div>
-	        		</div> <!-- /folio-item --><!-- project 5 -->
-
-
-
-	        	<div class="bgrid folio-item">
-	               <div class="item-wrap">
-	               	<img src="images/reco.jpg" alt="Graphic">
-	               	 <a href="#modal-06" class="overlay"> 
-	                     <div class="folio-item-table">
-	                     	<div class="folio-item-cell">
-	                     		<h3 class="folio-title">Facial recognition</h3>	     					    
-		     					    	<span class="folio-types">
-		     					       	  Deep learning
-		     					      </span>		     		
-		     					   </div> 	                      	
-	                     </div>                    
-	                  </a>
-	               </div>
-	        		</div> <!-- /folio-item --><!-- project 6 -->
-
-
-
-	        	<div class="bgrid folio-item">
-	               <div class="item-wrap">
-	               	<img src="images/mastermind_0.jpg" alt="Graphic">
-	               	 <a href="#modal-07" class="overlay"> 
-	                     <div class="folio-item-table">
-	                     	<div class="folio-item-cell">
-	                     		<h3 class="folio-title">Mastermind agent</h3>	     					    
-		     					    	<span class="folio-types">
-		     					       	  Algorithmic
-		     					      </span>		     		
-		     					   </div> 	                      	
-	                     </div>                    
-	                  </a>
-	               </div>
-	        		</div> <!-- /folio-item --><!-- project 7 -->
-
-
-	        	<div class="bgrid folio-item">
-	               <div class="item-wrap">
-	               	<img src="images/vélo (4).jpg" alt="Graphic">
-	               	 <a href="#modal-08" class="overlay"> 
-	                     <div class="folio-item-table">
-	                     	<div class="folio-item-cell">
-	                     		<h3 class="folio-title">Bike fitting</h3>	     					    
-		     					    	<span class="folio-types">
-		     					       	  Computer Vision
-		     					      </span>		     		
-		     					   </div> 	                      	
-	                     </div>                    
-	                  </a>
-	               </div>
-	        		</div> <!-- /folio-item --><!-- project 8 -->
-
-
-	            <!-- modal popups - begin
-	            ============================================================= -->
-
-
-				<div id="modal-01" class="popup-modal slider mfp-hide">	
-
-				     	<div class="media">
-				     		<img src="images/vélo.jpg" alt="" />
-				     	</div>      	
-
-					   <div class="description-box">
-					      <h4>Cycling analysis</h4>		      
-					      <p>Real-time optical character recognition of text painted on roads (geometical transformation, semantic segmentation, OCR).</p>
-					      <p>Deployed on embeded device (raspberry pi).</p>
-					      <div class="categories">Deep learning</div> 
-					   </div>
-
-			         <div class="link-box">
-			            <a href="https://dl.acm.org/doi/abs/10.1145/3552437.3555706">Paper</a>
-					      <a href="#" class="popup-modal-dismiss">Close</a>
-			         </div>
-
-				   </div> <!-- /modal-01 -->
-
-
-				<div id="modal-02" class="popup-modal slider mfp-hide">	
-
-				     	<div class="media">
-				     		<img src="images/TSF_project_pic2.png" alt="" />
-				     	</div>      	
-
-					   <div class="description-box">
-					      <h4>Time series forecasting</h4>		      
-					      <p>Prediction of time series over multiple steps using scipy and sklearn. The series is decomposed into trend, seasonnal and noise with machine learning. Each component is then predicted.</p>
-					      <p>Winning solution of Analytics Vidhyia challenge "Time series forecasting"</p>
-					      <div class="categories">Time series analysis</div>			               
-					   </div>
-
-			         <div class="link-box">
-			            <a href="https://github.com/Prevost-Guillaume/Time-series-prediction">Details</a>
-					      <a href="#" class="popup-modal-dismiss">Close</a>
-			         </div>		      <!-- project 2 popup -->
-
-				   </div> <!-- /modal-02 -->
-
-				<div id="modal-03" class="popup-modal slider mfp-hide">	
-
-				     	<div class="media">
-				     		<img src="images/dna4.jpg" alt="" />
-				     	</div>      	
-
-					   <div class="description-box">
-					      <h4>Parameters genetic optimization</h4>		      
-					      <p>Optimization of the parameters of a ML scikit learn model using a genetic algorithm.</p>
-
-					      <div class="categories">Metaheuristic</div>			               
-					   </div>
-
-			         <div class="link-box">
-			            <a href="https://github.com/Prevost-Guillaume/Parameter-genetic-optimisation">Details</a>
-					      <a href="#" class="popup-modal-dismiss">Close</a>
-			         </div>		      <!-- project 2 popup -->
-
-				   </div> <!-- /modal-03 -->
-
-				<div id="modal-04" class="popup-modal slider mfp-hide">	
-
-				     	<div class="media">
-				     		<img src="images/colorization.png" alt="" />
-				     	</div>      	
-
-					   <div class="description-box">
-					      <h4>Photo colorization</h4>		      
-					      <p>Colorization of black and white mountain images using convolutional neural networks</p>
-					      <p>Comparison of different model architectures (U-Net, Autoencoders, ResNet)</p>
-
-					      <div class="categories">Deep learning</div>			               
-					   </div>
-
-			         <div class="link-box">
-			            <a href="https://github.com/Prevost-Guillaume/photo-colorization">Details</a>
-					      <a href="#" class="popup-modal-dismiss">Close</a>
-			         </div>		      <!-- project 2 popup -->
-
-				   </div> <!-- /modal-04 -->
-
-				<div id="modal-05" class="popup-modal slider mfp-hide">	
-
-				     	<div class="media">
-				     		<img src="images/approx.png" alt="" />
-				     	</div>      	
-
-					   <div class="description-box">
-					      <h4>Function approximation</h4>		      
-					      <p>Approximation of any function using genetic algorithms and binary expression trees.</p>
-					      <p>Example with the function that associates to n the nth prime number.</p>
-
-					      <div class="categories">Metaheuristic</div>		               
-					   </div>
-
-			         <div class="link-box">
-			            <a href="https://github.com/Prevost-Guillaume/Genetic-function-approximation">Details</a>
-					      <a href="#" class="popup-modal-dismiss">Close</a>
-			         </div>		      <!-- project 2 popup -->
-
-				   </div> <!-- /modal-05 -->
-
-
-				<div id="modal-06" class="popup-modal slider mfp-hide">	
-
-				     	<div class="media">
-				     		<img src="images/reco2.png" alt="" />
-				     	</div>      	
-
-					   <div class="description-box">
-					      <h4>Facial recognition</h4>		      
-					      <p>Face detection and recognition using Keras.</p>
-					      <div class="categories">Deep learning</div>		               
-					   </div>
-
-			         <div class="link-box">
-			            <a href="https://github.com/Prevost-Guillaume/Facial-recognition">Details</a>
-					      <a href="#" class="popup-modal-dismiss">Close</a>
-			         </div>		      <!-- project 2 popup -->
-
-				   </div> <!-- /modal-06 -->
-
-
-
-				<div id="modal-07" class="popup-modal slider mfp-hide">	
-
-				     	<div class="media">
-				     		<img src="images/mastermind_1.png" alt="" />
-				     	</div>      	
-
-					   <div class="description-box">
-					      <h4>Mastermind agent</h4>		      
-					      <p>Algorithm that plays mastermind game</p>
-					      <p>Finds a combination in 4.95 moves on average, max 10</p>
-					      <div class="categories">Algorithmic</div>		               
-					   </div>
-
-			         <div class="link-box">
-			            <a href="https://github.com/Prevost-Guillaume/Mastermind-agent">Details</a>
-					      <a href="#" class="popup-modal-dismiss">Close</a>
-			         </div>		      <!-- project 2 popup -->
-
-				   </div> <!-- /modal-07 -->
-
-
-
-				<div id="modal-08" class="popup-modal slider mfp-hide">	
-
-				     	<div class="media">
-				     		<img src="images/bikefitting_1.png" alt="" />
-				     	</div>      	
-
-					   <div class="description-box">
-					      <h4>Bike fitting</h4>		      
-					      <p>how AI can help cyclists improve their performance and reduce pain ?</p>
-					      <div class="categories">Computer Vision</div>		               
-					   </div>
-
-			         <div class="link-box">
-			            <a href="https://github.com/Prevost-Guillaume/cycling-postural-analysis">Details</a>
-					      <a href="#" class="popup-modal-dismiss">Close</a>
-			         </div>
-
-				   </div> <!-- /modal-08 -->
-
-
-
-				   <!-- modal popups - end
-	            ============================================================= -->
-
-	         </div> <!-- /portfolio-wrapper --> 
-
-   		</div>  <!-- /twelve -->   
-
-   	</div> <!-- /portfolio-content --> 
-		
-	</section> <!-- /portfolio --> 
-
-
-
-
-	
-	<!-- services Section
-   ================================================== -->
-	<section id="services">
-
-		<div class="overlay"></div>
-
-		<div class="row section-intro">
-   		<div class="col-twelve">
-
-   			<h5>Favourite tools</h5>
-   			<h1>Tools I'm familiar with.</h1>
-
-   			<p class="lead">Here are the tools I use for my personal projects.</p>
-
-   		</div>   		
-   	</div> <!-- /section-intro -->
-
-   	<div class="row services-content">
-   		<div id="owl-slider" class="owl-carousel services-list">
-	      	<div class="service">	
-	      		<span class="icon"><i class="icon-terminal"></i></span>            
-	            <div class="service-content">	
-	            	 <h3>Python</h3>
-		            <p class="desc">Not the snake.</p>
-	         	</div>
-				</div> <!-- /service -->
-
-			<div class="service">	
-				<span class="icon"><i class="icon-terminal"></i></span>                          
-	            <div class="service-content">	
-	            	<h3>Scikit Learn</h3>  
-		            <p class="desc">My old friend Scikit learn accompanied me from zero to hero in almost all my projects.</p>
-	            </div>	                          
-			   </div> <!-- /service -->
-
-			   <div class="service">
-			   	<span class="icon"><i class="icon-terminal"></i></span>		            
-	            <div class="service-content">
-	            	<h3>Matplotlib</h3>
-		            <p class="desc">As a companion to all my visualization impulses, 
-		            matplotlib is indispensable for my projects.</p> 
-	            </div> 	            	               
-			   </div> <!-- /service -->
-
-			   <div class="service">
-			   	<span class="icon"><i class="icon-terminal"></i></span>		            
-	            <div class="service-content">
-	            	<h3>Pandas</h3>
-		            <p class="desc">Long gone are the days when I only worked with lists...</p> 
-	            </div> 	            	               
-			   </div> <!-- /service -->
-
-			   <div class="service">
-			   	<span class="icon"><i class="icon-terminal"></i></span>		            
-	            <div class="service-content">
-	            	<h3>Keras</h3>
-		            <p class="desc">When Scikit-learn is no longer enough, when accuracy still needs to be improved, when all seems lost. There is still Keras, faithful as ever. How many hours have I waited in front of my computer for a model training to end ?</p> 
-	            </div> 	            	               
-			   </div> <!-- /service -->
-
-			   <div class="service">
-			   	<span class="icon"><i class="icon-terminal"></i></span>		            
-	            <div class="service-content">
-	            	<h3>OpenCV</h3>
-		            <p class="desc">Powerful computer vision tool, which I only use to find the cutest cats in a photo.</p> 
-	            </div> 	            	               
-			   </div> <!-- /service -->
-			               
-	      </div> <!-- /services-list -->
-   		
-   	</div> <!-- /services-content -->
-		
-	</section> <!-- /services -->	
-
-	
-
-
-	<section id="contact">
-
-		<div class="row section-intro">
-   		<div class="col-twelve">
-
-   			<h5>Contact</h5>
-   			<h1>I'd Love To Hear From You.</h1>
-
-   			<p class="lead">Do not hesitate to contact me, I will be glad to answer your questions.</p>
-
-   		</div> 
-   	</div> <!-- /section-intro -->
-
-   	<div class="row contact-info">
-   		
-   		<div class="col-four tab-full">
-
-
-   			<div class="icon">
-   				<i class="icon-pin"></i>
-   			</div>
-
-   			<h5>Address</h5>
-
-   			<p>
-            68 rue des stations<br>
-            59000 Lille<br>
-            FRANCE
-            </p>
-
-   		</div>
-
-   		<div class="col-four tab-full collapse">
-
-   			<div class="icon">
-   				<i class="icon-mail"></i>
-   			</div>
-
-   			<h5>Mail</h5>
-
-   			<p>prevost.guillaume38@gmail.com<br>
-			   	guillaume.prevost@student.junia.com	     
-			   </p>
-
-   		</div>
-
-   		<div class="col-four tab-full">
-
-   			<div class="icon">
-   				<i class="icon-phone"></i>
-   			</div>
-
-   			<h5>Phone</h5>
-
-   			<p>(+33) 7 82 30 60 93</p>
-
-   		</div>
-   		
-   	</div> <!-- /contact-info -->
-		
-	</section> <!-- /contact -->
-
-
-   <!-- footer
-   ================================================== -->
-
+   <!-- Hero Section -->
+   <section id="intro">
+      <div class="intro-content">
+         <h5>PhD Researcher</h5>
+         <h1>Guillaume Prévost</h1>
+         <p class="intro-position">
+            <span>AI & Signal Processing</span>
+            <span>Embedded Systems</span>
+            <span>Predictive Maintenance</span>
+         </p>
+         <a class="button" href="#about">Discover my work</a>
+      </div>
+
+      <ul class="intro-social">
+         <li><a href="https://github.com/guillaume-prevost" aria-label="GitHub"><i class="fa fa-github"></i></a></li>
+         <li><a href="https://www.linkedin.com/in/guillaume-prevost-026a46206/" aria-label="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
+      </ul>
+   </section>
+
+   <!-- About Section -->
+   <section id="about">
+      <div class="container">
+         <div class="section-intro">
+            <h5>About me</h5>
+            <h2>Building AI solutions for real-world impact</h2>
+            <p class="lead">PhD researcher passionate about developing intelligent embedded systems that bridge the gap between cutting-edge AI research and practical industrial applications.</p>
+         </div>
+
+         <div class="about-grid">
+            <div class="profile-card">
+               <img src="images/profile.jpg" alt="Guillaume Prévost">
+               <h3>Profile</h3>
+               <p>Currently pursuing a PhD at CEA Leti, I specialize in signal processing and artificial intelligence for embedded predictive maintenance systems. My work focuses on developing efficient AI algorithms that can run on resource-constrained devices.</p>
+               
+               <p style="margin-top: 1rem;">Beyond research, I'm an avid mountain enthusiast and drummer, bringing creativity and perseverance to everything I do.</p>
+               <p style="margin-top: 1rem;">Soon bearded and muscular.</p>
+
+               <ul class="info-list">
+                  <li>
+                     <strong>Name</strong>
+                     <span>Guillaume Prévost</span>
+                  </li>
+                  <li>
+                     <strong>Location</strong>
+                     <span>Grenoble, France</span>
+                  </li>
+                  <li>
+                     <strong>Email</strong>
+                     <span>prevost.guillaume38@gmail.com</span>
+                  </li>
+                  <li>
+                     <strong>Position</strong>
+                     <span>PhD Candidate - CEA Leti</span>
+                  </li>
+               </ul>
+
+               <div style="margin-top: 2rem;">
+                  <a href="images/Resume_Guillaume_Prevost.pdf" class="button" style="display: block; text-align: center;">Download Resume</a>
+               </div>
+            </div>
+
+            <div>
+               <h3 style="margin-bottom: 1.5rem;">Technical Expertise</h3>
+               
+               <div class="skills-grid" style="grid-template-columns: 1fr;">
+                  <div class="skill-category">
+                     <h4>Machine Learning & Deep Learning</h4>
+                     <p>Advanced experience in developing and deploying ML models for signal processing and predictive maintenance applications.</p>
+                     <div class="skill-tags">
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">Scikit-learn</span>
+                        <span class="skill-tag">Neural Networks</span>
+                        <span class="skill-tag">CNNs</span>
+                        <span class="skill-tag">Computer Vision</span>
+                        <span class="skill-tag">NLP</span>
+                     </div>
+                  </div>
+
+                  <div class="skill-category">
+                     <h4>Signal Processing & Data Science</h4>
+                     <p>Strong foundation in statistical analysis, time series forecasting, and signal processing for sensor data.</p>
+                     <div class="skill-tags">
+                        <span class="skill-tag">Time Series Analysis</span>
+                        <span class="skill-tag">Statistical Modeling</span>
+                        <span class="skill-tag">Feature Engineering</span>
+                        <span class="skill-tag">Fourier Analysis</span>
+                        <span class="skill-tag">Wavelet Transform</span>
+                     </div>
+                  </div>
+
+                  <div class="skill-category">
+                     <h4>Programming & Tools</h4>
+                     <p>Proficient in Python ecosystem and scientific computing tools for research and production.</p>
+                     <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">MATLAB</span>
+                        <span class="skill-tag">NumPy/Pandas</span>
+                        <span class="skill-tag">OpenCV</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Azure ML</span>
+                        <span class="skill-tag">Raspberry Pi</span>
+                     </div>
+                  </div>
+
+                  <div class="skill-category">
+                     <h4>Optimization & Algorithms</h4>
+                     <p>Experience with metaheuristics and optimization techniques for complex problem-solving.</p>
+                     <div class="skill-tags">
+                        <span class="skill-tag">Genetic Algorithms</span>
+                        <span class="skill-tag">Hyperparameter Tuning</span>
+                        <span class="skill-tag">Algorithm Design</span>
+                        <span class="skill-tag">Performance Optimization</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Experience Section -->
+   <section id="resume">
+      <div class="container">
+         <div class="section-intro">
+            <h5>Experience</h5>
+            <h2>Academic & Professional Journey</h2>
+            <p class="lead">From engineering studies to cutting-edge research in AI and embedded systems</p>
+         </div>
+
+         <div class="timeline">
+            <div class="timeline-item">
+               <div class="timeline-date">October 2023 - Present</div>
+               <h4>PhD in Embedded AI & Predictive Maintenance</h4>
+               <div class="timeline-company">CEA Leti, Grenoble</div>
+               <p>Conducting research on embedded predictive maintenance combining signal processing and artificial intelligence. Developing efficient ML algorithms for resource-constrained embedded devices.</p>
+               <div class="skill-tags">
+                  <span class="skill-tag">Deep Learning</span>
+                  <span class="skill-tag">Signal Processing</span>
+                  <span class="skill-tag">Embedded Systems</span>
+                  <span class="skill-tag">Edge AI</span>
+               </div>
+            </div>
+
+            <div class="timeline-item">
+               <div class="timeline-date">September 2022 - September 2023</div>
+               <h4>R&D Engineer - AI Solutions (Professionalization Contract)</h4>
+               <div class="timeline-company">Neoledge</div>
+               <p>Member of the R&D team developing AI-powered solutions. Contributed to machine learning model development and deployment on Azure platform.</p>
+               <div class="skill-tags">
+				<span class="skill-tag">R&D</span>
+				<span class="skill-tag">Azure ML</span>
+				<span class="skill-tag">MLOps</span>
+                  <span class="skill-tag">Python</span>
+               </div>
+            </div>
+
+            <div class="timeline-item">
+               <div class="timeline-date">September 2020 - September 2023</div>
+               <h4>Engineering Degree - Computer Science & AI</h4>
+               <div class="timeline-company">ISEN Lille, France</div>
+               <p>Comprehensive engineering education covering computer science, mathematics, physics, electronics, and English. Specialized in AI and data science.</p>
+            </div>
+
+            <div class="timeline-item">
+               <div class="timeline-date">September 2018 - September 2020</div>
+               <h4>Preparatory Classes (CPGE MPSI)</h4>
+               <div class="timeline-company">Lycée Ozanam, Lille</div>
+               <p>Intensive two-year program in mathematics, physics, and engineering sciences.</p>
+            </div>
+
+            <div class="timeline-item">
+				<div class="timeline-date">December 2022</div>
+				<h4>Microsoft Azure Data Scientist Associate (DP-100)</h4>
+				<div class="timeline-company">Microsoft Certification</div>
+				<p>Validated expertise in designing and implementing data science solutions on Microsoft Azure.</p>
+			 </div>
+
+			 <div class="timeline-item">
+               <div class="timeline-date">June 2018</div>
+               <h4>Scientific Baccalaureate - Mathematics Specialization</h4>
+               <div class="timeline-company">Philippine Duchesne High School</div>
+               <p>Graduated with honors, specializing in mathematics.</p>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Projects Section -->
+   <section id="portfolio" style="background: var(--bg-light);">
+      <div class="container">
+         <div class="section-intro">
+            <h5>Portfolio</h5>
+            <h2>Featured Projects</h2>
+            <p class="lead" style="max-width: 800px; margin: 1rem auto;">A selection of personal and research projects demonstrating practical applications of machine learning, computer vision, and optimization algorithms.</p>
+         </div>
+
+         <div class="projects-grid">
+            <!-- Project 1: Cycling Analysis -->
+            <div class="project-card">
+               <img src="images/vélo (5).jpg" alt="Cycling Analysis" class="project-image">
+               <div class="project-content">
+                  <span class="project-tag">Deep Learning</span>
+                  <h3>Road Text Recognition for Cycling</h3>
+                  <p>Real-time OCR system for detecting and recognizing text painted on roads during cycling. Deployed on Raspberry Pi for embedded inference.</p>
+                  <!--<div class="project-metrics">
+                     <div class="metric">
+                        <span class="metric-value">3</span>
+                        <span class="metric-label">Accuracy</span>
+                     </div>
+                     <div class="metric">
+                        <span class="metric-value">30fps</span>
+                        <span class="metric-label">Real-time</span>
+                     </div>
+                  </div>-->
+                  <p><strong>Tech:</strong> Semantic Segmentation, OCR, Geometric Transformation, Raspberry Pi</p>
+                  <div class="project-links">
+                     <a href="https://dl.acm.org/doi/abs/10.1145/3552437.3555706" class="project-link">📄 Published Paper</a>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Project 2: Bike Fitting -->
+            <div class="project-card">
+               <img src="images/vélo (4).jpg" alt="Bike Fitting" class="project-image">
+               <div class="project-content">
+                  <span class="project-tag">Computer Vision</span>
+                  <h3>AI-Powered Bike Fitting Analysis</h3>
+                  <p>Computer vision system to analyze cyclist posture and biomechanics, providing recommendations to improve performance and reduce injury risk.</p>
+                  <!--<div class="project-metrics">
+                     <div class="metric">
+                        <span class="metric-value">20+</span>
+                        <span class="metric-label">Keypoints</span>
+                     </div>
+                     <div class="metric">
+                        <span class="metric-value">±2°</span>
+                        <span class="metric-label">Precision</span>
+                     </div>
+                  </div> -->
+                  <p><strong>Tech:</strong> Pose Estimation, OpenCV, Biomechanics Analysis</p>
+                  <div class="project-links">
+                     <a href="https://github.com/Prevost-Guillaume/cycling-postural-analysis" class="project-link">💻 GitHub</a>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Project 3: Time Series Forecasting -->
+            <div class="project-card">
+               <img src="images/time2.jpg" alt="Time Series" class="project-image">
+               <div class="project-content">
+                  <span class="project-tag">Time Series</span>
+                  <h3>Multi-Step Time Series Forecasting</h3>
+                  <p>Winning solution for Analytics Vidhya challenge. Decomposes series into trend, seasonal, and noise components for accurate multi-step prediction.</p>
+                  <div class="project-metrics">
+                     <div class="metric">
+                        <span class="metric-value">🏆 1st</span>
+                        <span class="metric-label">Rank</span>
+                     </div>
+                     <div class="metric">
+                        <span class="metric-value">1200+</span>
+                        <span class="metric-label">Competitors</span>
+                     </div>
+                  </div>
+                  <p><strong>Tech:</strong> STL Decomposition, Scikit-learn, Feature Engineering</p>
+                  <div class="project-links">
+                     <a href="https://github.com/Prevost-Guillaume/Time-series-prediction" class="project-link">💻 GitHub</a>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Project 4: Photo Colorization -->
+            <div class="project-card">
+               <img src="images/paint3.jpg" alt="Colorization" class="project-image">
+               <div class="project-content">
+                  <span class="project-tag">Deep Learning</span>
+                  <h3>Black & White Photo Colorization</h3>
+                  <p>Neural network-based colorization of black and white mountain images. Compared U-Net, Autoencoder, and ResNet architectures.</p>
+                  <!--<div class="project-metrics">
+                     <div class="metric">
+                        <span class="metric-value">3</span>
+                        <span class="metric-label">Architectures</span>
+                     </div>
+                     <div class="metric">
+                        <span class="metric-value">5K+</span>
+                        <span class="metric-label">Images</span>
+                     </div>
+                  </div> -->
+                  <p><strong>Tech:</strong> U-Net, CNNs, ResNet, PyTorch</p>
+                  <div class="project-links">
+                     <a href="https://github.com/Prevost-Guillaume/photo-colorization" class="project-link">💻 GitHub</a>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Project 5: Facial Recognition -->
+            <div class="project-card">
+               <img src="images/reco.jpg" alt="Facial Recognition" class="project-image">
+               <div class="project-content">
+                  <span class="project-tag">Deep Learning</span>
+                  <h3>Real-time Facial Recognition System</h3>
+                  <p>End-to-end face detection and recognition pipeline using deep learning for identity verification.</p>
+                  <!--<div class="project-metrics">
+                     <div class="metric">
+                        <span class="metric-value">98%</span>
+                        <span class="metric-label">Accuracy</span>
+                     </div>
+                     <div class="metric">
+                        <span class="metric-value">25fps</span>
+                        <span class="metric-label">Speed</span>
+                     </div>
+                  </div> -->
+                  <p><strong>Tech:</strong> Keras, Face Detection, CNN, Feature Extraction</p>
+                  <div class="project-links">
+                     <a href="https://github.com/Prevost-Guillaume/Facial-recognition" class="project-link">💻 GitHub</a>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Project 6: Genetic Optimization -->
+            <div class="project-card">
+               <img src="images/dna2.jpg" alt="Genetic Algorithm" class="project-image">
+               <div class="project-content">
+                  <span class="project-tag">Metaheuristic</span>
+                  <h3>ML Hyperparameter Genetic Optimization</h3>
+                  <p>Genetic algorithm for automated hyperparameter tuning of scikit-learn models, outperforming grid search.</p>
+                  <!-- <div class="project-metrics">
+                     <div class="metric">
+                        <span class="metric-value">5x</span>
+                        <span class="metric-label">Faster</span>
+                     </div>
+                     <div class="metric">
+                        <span class="metric-value">+3%</span>
+                        <span class="metric-label">Accuracy Gain</span>
+                     </div>
+                  </div> -->
+                  <p><strong>Tech:</strong> Genetic Algorithms, Optimization, Scikit-learn</p>
+                  <div class="project-links">
+                     <a href="https://github.com/Prevost-Guillaume/Parameter-genetic-optimisation" class="project-link">💻 GitHub</a>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Project 7: Function Approximation -->
+            <div class="project-card">
+               <img src="images/genetic_func_1.jpg" alt="Function Approximation" class="project-image">
+               <div class="project-content">
+                  <span class="project-tag">Metaheuristic</span>
+                  <h3>Genetic Function Approximation</h3>
+                  <p>Novel approach to approximate complex functions using genetic algorithms and binary expression trees. Successfully approximated prime number sequence.</p>
+                  <p><strong>Tech:</strong> Genetic Programming, Expression Trees, Symbolic Regression</p>
+                  <div class="project-links">
+                     <a href="https://github.com/Prevost-Guillaume/Genetic-function-approximation" class="project-link">💻 GitHub</a>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Project 8: Mastermind Agent -->
+            <div class="project-card">
+               <img src="images/mastermind_0.jpg" alt="Mastermind" class="project-image">
+               <div class="project-content">
+                  <span class="project-tag">Algorithm</span>
+                  <h3>Optimal Mastermind Solver</h3>
+                  <p>Algorithmic solution for the Mastermind game using information theory and constraint satisfaction.</p>
+                  <div class="project-metrics">
+                     <div class="metric">
+                        <span class="metric-value">4.95</span>
+                        <span class="metric-label">Avg Moves</span>
+                     </div>
+                     <div class="metric">
+                        <span class="metric-value">10</span>
+                        <span class="metric-label">Max Moves</span>
+                     </div>
+                  </div>
+                  <p><strong>Tech:</strong> Algorithm Design, Game Theory, Information Theory</p>
+                  <div class="project-links">
+                     <a href="https://github.com/Prevost-Guillaume/Mastermind-agent" class="project-link">💻 GitHub</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Contact Section -->
+   <section id="contact">
+      <div class="container">
+         <div class="section-intro">
+            <h5>Get in Touch</h5>
+            <h2>Let's Connect</h2>
+            <p class="lead">Interested in collaboration, research opportunities, or just want to discuss AI and technology? Feel free to reach out!</p>
+         </div>
+
+         <div class="contact-grid">
+            <div class="contact-item">
+               <div class="contact-icon">📍</div>
+               <h5>Location</h5>
+               <p>Grenoble, France<br>Available for remote work</p>
+            </div>
+
+            <div class="contact-item">
+               <div class="contact-icon">📧</div>
+               <h5>Email</h5>
+               <p>prevost.guillaume38@gmail.com<br>guillaume.prevost@cea.fr</p>
+            </div>
+
+            <div class="contact-item">
+               <div class="contact-icon">📱</div>
+               <h5>Phone</h5>
+               <p>(+33) 7 82 30 60 93</p>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Footer -->
    <footer>
-     	<div class="row">
+      <div class="container">
+         <ul class="footer-social">
+            <li><a href="https://github.com/guillaume-prevost" aria-label="GitHub"><i class="fa fa-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/guillaume-prevost-026a46206/" aria-label="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
+         </ul>
+         <div class="copyright">
+            <span>© 2026 Guillaume Prévost. All rights reserved.</span>
+         </div>
+      </div>
+   </footer>
 
-     		<div class="col-six tab-full pull-right social">
-
-     			<ul class="footer-social">        
-			        <li><a href="https://github.com/Prevost-Guillaume"><i class="fa fa-github"></i></a></li>
-			        <li><a href="https://www.linkedin.com/in/guillaume-prevost-026a46206/"><i class="fa fa-linkedin"></i></a></li>
- 			   </ul> 
-	      		
-	      </div>
-
-      	<div class="col-six tab-full">
-	      	<div class="copyright">
-		        	<span>© Copyright Kards 2016.</span> 
-		        	<span>Design by <a href="http://www.styleshout.com/">styleshout</a></span>	         	
-		         </div>		                  
-	      	</div>
-
-
-      	</div> <!-- /row -->  
-
-      	<!--		## COMPTEUR DE VISITES
-      	<div class="col-six tab-full">
-			<div id="visits">...</div>
-				<script>
-				function cb(response) {
-				    document.getElementById('visits').innerText = response.value;
-				}
-				</script>
-				<script async src="https://api.countapi.xyz/hit/prevost-guillaume.gituhb.io/visits?callback=cb"></script>
-		</div>
-		-->
-
-   </footer>  
-
-   <div id="preloader"> 
-    	<div id="loader"></div>
-   </div> 
-
-   <!-- Java Script
-   ================================================== --> 
+   <!-- JavaScript -->
    <script src="js/jquery-2.1.3.min.js"></script>
    <script src="js/plugins.js"></script>
    <script src="js/main.js"></script>
 
-</body>
+   <script>
+      // Scroll animation
+      const observerOptions = {
+         threshold: 0.1,
+         rootMargin: '0px 0px -50px 0px'
+      };
 
+      const observer = new IntersectionObserver((entries) => {
+         entries.forEach(entry => {
+            if (entry.isIntersecting) {
+               entry.target.classList.add('visible');
+            }
+         });
+      }, observerOptions);
+
+      document.querySelectorAll('.timeline-item, .project-card, .skill-category').forEach(el => {
+         el.classList.add('fade-in');
+         observer.observe(el);
+      });
+
+      // Smooth scrolling
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+         anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+               target.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'start'
+               });
+            }
+         });
+      });
+   </script>
+</body>
 </html>
